@@ -57,11 +57,10 @@ export default {
   methods: {
     fetchAppointments() {
       fetch("https://lrpf1ybopg.execute-api.us-east-1.amazonaws.com/prod/appointments")
-        .then(res => res.json())
         .then(data => {
-          const parsed = JSON.parse(data.body);
-          this.appointments = parsed;
-        });
+  const parsed = JSON.parse(data.body);
+  this.appointments = parsed;
+});
     },
     updateStatus(appointment, newStatus) {
       console.log(" appointment (proxy):", appointment);
