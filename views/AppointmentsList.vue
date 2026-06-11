@@ -57,9 +57,9 @@ export default {
   methods: {
     fetchAppointments() {
       fetch("https://lrpf1ybopg.execute-api.us-east-1.amazonaws.com/prod/appointments")
-        .then(data => {
-  const parsed = JSON.parse(data.body);
-  this.appointments = parsed;
+    .then(res => res.json())
+    .then(data => {
+      this.appointments = data;
 });
     },
     updateStatus(appointment, newStatus) {
