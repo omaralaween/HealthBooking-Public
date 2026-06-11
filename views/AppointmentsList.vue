@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <nav class="navbar navbar-light bg-white shadow-sm mb-4">
@@ -7,7 +6,6 @@
         <router-link to="/" class="btn btn-outline-primary">⇆ Switch Page</router-link>
       </div>
     </nav>
-
     <div class="container">
       <div class="card shadow-sm">
         <div class="card-header">
@@ -45,7 +43,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: "AppointmentsList",
@@ -59,7 +56,7 @@ export default {
   },
   methods: {
     fetchAppointments() {
-      fetch("https://e2m2b7y8c9.execute-api.us-east-1.amazonaws.com/prod/appointments")
+      fetch("https://lrpf1ybopg.execute-api.us-east-1.amazonaws.com/prod/appointments")
         .then(res => res.json())
         .then(data => {
           const parsed = JSON.parse(data.body);
@@ -67,17 +64,13 @@ export default {
         });
     },
     updateStatus(appointment, newStatus) {
-      // Log the full appointment object and its ID
       console.log(" appointment (proxy):", appointment);
       const cleanAppointment = JSON.parse(JSON.stringify(appointment));
       console.log(" Clean appointment:", cleanAppointment);
       console.log("appointmentId:", cleanAppointment.appointmentId);
       console.log(" appointmentId (direct):", appointment.appointmentId);
-
-      const url = `https://e2m2b7y8c9.execute-api.us-east-1.amazonaws.com/prod/appointments/${appointment.appointmentId}`;
-
+      const url = `https://lrpf1ybopg.execute-api.us-east-1.amazonaws.com/prod/appointments/${appointment.appointmentId}`;
       const payload = { status: newStatus };
-
       fetch(url, {
         method: "PATCH",
         headers: {
@@ -86,13 +79,10 @@ export default {
         body: JSON.stringify(payload)
       })
           .then(async res => {
-
             const rawBody = await res.text();
-
             if (!res.ok) {
               throw new Error(`HTTP ${res.status}: ${rawBody}`);
             }
-
             return JSON.parse(rawBody);
           })
           .then(() => {
@@ -103,7 +93,6 @@ export default {
             alert("Update failed. See console for details.");
           });
     }
-
      }
 };
 </script>
