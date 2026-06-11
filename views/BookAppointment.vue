@@ -55,29 +55,29 @@ export default {
   },
   methods: {
     submitAppointment() {
-      const payload = {
-        patientName: this.name,
-        symptoms: this.symptoms,
-        slot: this.selectedSlot
-      };
+  const payload = {
+    patientName: this.name,
+    symptoms: this.symptoms,
+    slot: this.selectedSlot
+  };
 
-      fetch("https://e2m2b7y8c9.execute-api.us-east-1.amazonaws.com/prod/appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ body: JSON.stringify(payload) })
-      })
-        .then(res => res.json())
-        .then(() => {
-          alert("Appointment booked!");
-          this.name = "";
-          this.symptoms = "";
-          this.selectedSlot = "";
-        })
-        .catch(err => {
-          console.error("Error booking appointment:", err);
-          alert("Failed to book appointment.");
-        });
-    }
+  fetch("https://lrpf1ybopg.execute-api.us-east-1.amazonaws.com/prod/appointments", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+    .then(res => res.json())
+    .then(() => {
+      alert("Appointment booked!");
+      this.name = "";
+      this.symptoms = "";
+      this.selectedSlot = "";
+    })
+    .catch(err => {
+      console.error("Error booking appointment:", err);
+      alert("Failed to book appointment.");
+    });
+}
   }
 };
 </script>
